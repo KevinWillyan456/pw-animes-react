@@ -1,7 +1,12 @@
-import './App.css'
+import { Home } from './pages/Home'
+import './styles/globalStyles.css'
 
 function App() {
-    return <>Olá, React</>
+    return (
+        <>
+            <Home />
+        </>
+    )
 }
 
 export default App
