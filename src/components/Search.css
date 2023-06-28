@@ -1,0 +1,25 @@
+.pesquisa {
+    width: 100%;
+    color: var(--color-white);
+    padding: 10px 20px;
+    background-color: #222;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+}
+.pesquisa .icon {
+    font-size: 30px;
+}
+.pesquisa input {
+    width: 100%;
+    color: var(--color-white);
+    font-size: 20px;
+    background-color: #222;
+    padding-left: 10px;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}

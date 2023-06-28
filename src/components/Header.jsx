@@ -1,4 +1,5 @@
 import './Header.css'
+import { Search } from './Search'
 
 export function Header() {
     return (
@@ -31,6 +32,7 @@ export function Header() {
                     </ul>
                 </nav>
             </header>
+            <Search />
         </>
     )
 }
