@@ -12,7 +12,7 @@ export function Main() {
     }
 
     useEffect(() => {
-        const url = 'http://localhost:5000/api/animes'
+        const url = 'http://localhost:5000/animes'
         getAnimes(url)
     }, [])
 

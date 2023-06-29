@@ -12,7 +12,14 @@
     gap: 20px;
 }
 
-@media (max-width: 1360px)
+@media (max-width: 1800px)
+{
+    .container-animes .content-animes {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (max-width: 1500px)
 {
     .container-animes .content-animes {
         grid-template-columns: repeat(4, 1fr);
