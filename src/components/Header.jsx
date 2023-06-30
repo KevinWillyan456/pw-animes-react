@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './Header.css'
 import { Search } from './Search'
 
@@ -5,14 +6,16 @@ export function Header() {
     return (
         <>
             <header className="cabecalho">
-                <div className="logo">
-                    <div className="part-1">Pw</div>
-                    <div className="part-2">Animes</div>
-                </div>
+                <Link to={'/'}>
+                    <div className="logo">
+                        <div className="part-1">Pw</div>
+                        <div className="part-2">Animes</div>
+                    </div>
+                </Link>
                 <nav className="navbar">
                     <ul className="navbar-ul">
                         <li>
-                            <a href="#">Início</a>
+                            <Link to={'/'}>Início</Link>
                         </li>
                         <li>
                             <a href="#">Lista de Animes</a>

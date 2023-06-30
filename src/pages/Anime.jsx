@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { Header } from '../components/Header'
+import { Footer } from '../components/Footer'
+import { AnimeContent } from '../components/AnimeContent'
 
 export function Anime() {
     const { id } = useParams()
@@ -18,12 +21,9 @@ export function Anime() {
 
     return (
         <>
-            {anime && (
-                <>
-                    <div>Nome do anime: {anime.nome}</div>
-                    <div>{anime.sinopse}</div>
-                </>
-            )}
+            <Header />
+            {anime && <AnimeContent anime={anime} />}
+            <Footer />
         </>
     )
 }
