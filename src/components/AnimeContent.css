@@ -1,19 +1,36 @@
-.title,
-.title-synopsis,
-.synopsis-content {
+.anime-content-title,
+.anime-content-title-synopsis,
+.anime-content-synopsis-content {
     color: var(--color-white);
 }
 
-.title {
+.anime-content-title {
     background-color: var(--color-base-4);
     padding: 10px 20px;
 }
-.title-synopsis {
+.anime-content-title-synopsis {
     background-color: var(--color-base-6);
     padding: 10px 20px;
 }
-.synopsis-content {
+.anime-content-synopsis-content {
     background-color: var(--color-base-6);
     padding: 10px 20px;
     font-size: 18px;
+}
+.anime-content-episode {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+.anime-content-episode .current-episode {
+    color: var(--color-base-1);
+    font-size: 2.5em;
+}
+.anime-content-episode .age {
+    width: 80px;
+    height: 80px;
+}
+.anime-content-episode .age img {
+    width: 100%;
 }
