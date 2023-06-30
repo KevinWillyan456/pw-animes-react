@@ -1,14 +1,17 @@
+import { Link } from 'react-router-dom'
 import './Card.css'
 import PropTypes from 'prop-types'
 
 export function Card({ anime }) {
     return (
-        <div className="card">
-            <div className="card-img">
-                <img src={anime.urlCapa} />
+        <Link to={`/anime/${anime.id}`}>
+            <div className="card">
+                <div className="card-img">
+                    <img src={anime.urlCapa} />
+                </div>
+                <div className="card-title">{anime.nome}</div>
             </div>
-            <div className="card-title">{anime.nome}</div>
-        </div>
+        </Link>
     )
 }
 
