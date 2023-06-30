@@ -34,3 +34,16 @@
 .anime-content-episode .age img {
     width: 100%;
 }
+.view-episode {
+    width: 100%;
+    background-color: var(--color-base-7);
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.view-episode div iframe {
+    border: none;
+    width: 80vw;
+}
