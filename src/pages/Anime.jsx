@@ -15,7 +15,7 @@ export function Anime() {
     }
 
     useEffect(() => {
-        const animeUrl = `http://localhost:5000/animes/${id}`
+        const animeUrl = `https://pw-animes-react-database.kevinsouza456.repl.co/animes/${id}`
         getAnime(animeUrl)
     }, [])
 

@@ -12,7 +12,7 @@ export function Main() {
     }
 
     useEffect(() => {
-        const url = 'http://localhost:5000/animes'
+        const url = 'https://pw-animes-react-database.kevinsouza456.repl.co/animes'
         getAnimes(url)
     }, [])
 
