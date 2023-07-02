@@ -41,6 +41,7 @@ export function AnimeContent({ anime }) {
 
     useEffect(() => {
         gerenciarEpisodioTela()
+        setSelectedEpisode(episode)
     }, [episode])
 
     useEffect(() => {
@@ -106,11 +107,23 @@ export function AnimeContent({ anime }) {
 
             <div className="list-episodes">
                 <ul>
-                    <AnimeContentEpisodeList
-                        anime={anime}
-                        selectedEpisode={selectedEpisode}
-                        gerenciarEpisodioButton={gerenciarEpisodioButton}
-                    />
+                    {anime.episodios.map((episodio) => {
+                        const buttonClass =
+                            episodio.episodioId === selectedEpisode
+                                ? 'selected'
+                                : ''
+
+                        return (
+                            <AnimeContentEpisodeList
+                                key={episodio.episodioId}
+                                buttonClass={buttonClass}
+                                episodio={episodio}
+                                gerenciarEpisodioButton={
+                                    gerenciarEpisodioButton
+                                }
+                            />
+                        )
+                    })}
                 </ul>
             </div>
         </>
