@@ -1,8 +1,18 @@
+import { useState } from 'react'
+import { GiHamburgerMenu } from 'react-icons/gi'
+import { AiOutlineClose } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import './Header.css'
 import { Search } from './Search'
 
+import './Header.css'
+
 export function Header() {
+    const [mostrarMenu, setMostrarMenu] = useState(false)
+
+    const handleClick = () => {
+        setMostrarMenu(!mostrarMenu)
+    }
+
     return (
         <>
             <header className="cabecalho">
@@ -33,6 +43,42 @@ export function Header() {
                             <a href="#">Como assistir?</a>
                         </li>
                     </ul>
+
+                    <div onClick={handleClick} className="navbar-hamburger">
+                        <GiHamburgerMenu />
+                    </div>
+
+                    {mostrarMenu && (
+                        <div className="menu-mobile">
+                            <AiOutlineClose
+                                onClick={handleClick}
+                                className="navbar-hamburger-close"
+                            />
+
+                            <ul className="navbar-ul-mobile">
+                                <li>
+                                    <Link onClick={handleClick} to={'/'}>
+                                        Início
+                                    </Link>
+                                </li>
+                                <li>
+                                    <a href="#">Lista de Animes</a>
+                                </li>
+                                <li>
+                                    <a href="#">Favoritos</a>
+                                </li>
+                                <li>
+                                    <a href="#">Mangás</a>
+                                </li>
+                                <li>
+                                    <a href="#">Calendário</a>
+                                </li>
+                                <li>
+                                    <a href="#">Como assistir?</a>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
                 </nav>
             </header>
             <Search />

@@ -120,3 +120,18 @@
 .actionButtons .next.forbidden {
     opacity: 0.6;
 }
+
+@media (max-width: 500px) {
+    .anime-content-title {
+        font-size: 24px;
+    }
+    .anime-content-synopsis-content {
+        font-size: 16px;
+    }
+    .actionButtons .prev,
+    .actionButtons .next {
+        width: 140px;
+        height: 60px;
+        font-size: 20px;
+    }
+}
