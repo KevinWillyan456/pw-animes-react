@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
-import './Card.css'
 import PropTypes from 'prop-types'
+
+import './Card.css'
 
 export function Card({ anime }) {
     return (

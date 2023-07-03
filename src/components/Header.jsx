@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { AiOutlineClose } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import { Search } from './Search'
+import { Search } from './SearchInput'
 
 import './Header.css'
 
