@@ -18,6 +18,19 @@ export function MainSearch() {
             return anime.nome.toLowerCase().includes(query.toLowerCase())
         })
 
+        dataSerched.sort((a, b) => {
+            const nomeA = a.nome.toUpperCase()
+            const nomeB = b.nome.toUpperCase()
+
+            if (nomeA < nomeB) {
+                return -1
+            }
+            if (nomeA > nomeB) {
+                return 1
+            }
+            return 0
+        })
+
         setAnimes(dataSerched)
     }
 
@@ -30,7 +43,10 @@ export function MainSearch() {
     return (
         <>
             <section className="container-animes">
-                <h2 className="main-search-title">Resultados da pesquisa</h2>
+                <h2 className="main-search-title">
+                    Resultados da pesquisa:
+                    <div className="main-search-result">{query}</div>
+                </h2>
                 <div className="content-animes">
                     {animes.length > 0 ? (
                         animes.map((anime) => (

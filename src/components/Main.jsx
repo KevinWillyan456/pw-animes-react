@@ -8,11 +8,26 @@ export function Main() {
     const getAnimes = async (url) => {
         const res = await fetch(url)
         const data = await res.json()
+
+        data.sort((a, b) => {
+            const nomeA = a.nome.toUpperCase()
+            const nomeB = b.nome.toUpperCase()
+
+            if (nomeA < nomeB) {
+                return -1
+            }
+            if (nomeA > nomeB) {
+                return 1
+            }
+            return 0
+        })
+
         setAnimes(data)
     }
 
     useEffect(() => {
-        const url = 'https://pw-animes-react-database.kevinsouza456.repl.co/animes'
+        const url =
+            'https://pw-animes-react-database.kevinsouza456.repl.co/animes'
         getAnimes(url)
     }, [])
 

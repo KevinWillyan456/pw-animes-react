@@ -8,10 +8,23 @@
     display: flex;
     align-items: center;
 }
-.pesquisa .icon {
+.pesquisa form {
+    display: flex;
+    width: 100%;
+}
+.pesquisa form button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: inherit;
+    display: flex;
+    cursor: pointer;
     font-size: 30px;
 }
-.pesquisa input {
+.pesquisa form .icon {
+    font-size: 30px;
+}
+.pesquisa form input {
     width: 100%;
     color: var(--color-white);
     font-size: 20px;
