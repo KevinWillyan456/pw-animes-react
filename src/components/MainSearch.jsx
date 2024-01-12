@@ -9,7 +9,14 @@ export function MainSearch() {
     const query = searchParams.get('q')
 
     const getSearchedAnimes = async (url) => {
-        const res = await fetch(url)
+        const res = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                api_key: import.meta.env.VITE_API_KEY,
+            },
+        })
         const data = await res.json()
 
         if (!query) return
@@ -35,9 +42,9 @@ export function MainSearch() {
     }
 
     useEffect(() => {
-        const searchWithQueryURL =
-            'https://pw-animes-react-database.kevinsouza456.repl.co/animes'
+        const searchWithQueryURL = `${import.meta.env.VITE_API_URL}/animes`
         getSearchedAnimes(searchWithQueryURL)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [query])
 
     return (
@@ -50,7 +57,7 @@ export function MainSearch() {
                 <div className="content-animes">
                     {animes.length > 0 ? (
                         animes.map((anime) => (
-                            <Card key={anime.id} anime={anime} />
+                            <Card key={anime._id} anime={anime} />
                         ))
                     ) : (
                         <div className="anime-not-found">

@@ -84,7 +84,14 @@ export function AnimeContent({ anime }) {
                 </div>
                 <div className="age">
                     <img
-                        src={anime.classificacaoIndicativa in classificacaoIndicativa ? classificacaoIndicativa[anime.classificacaoIndicativa] : classificacaoIndicativa['L']}
+                        src={
+                            anime.classificacaoIndicativa in
+                            classificacaoIndicativa
+                                ? classificacaoIndicativa[
+                                      anime.classificacaoIndicativa
+                                  ]
+                                : classificacaoIndicativa['L']
+                        }
                         alt="age"
                     />
                 </div>
