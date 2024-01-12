@@ -5,7 +5,7 @@ import './Card.css'
 
 export function Card({ anime }) {
     return (
-        <Link to={`/anime/${anime.id}`}>
+        <Link to={`/anime/${anime._id}`}>
             <div className="card">
                 <div className="card-img">
                     <img src={anime.urlCapa} />
@@ -18,6 +18,7 @@ export function Card({ anime }) {
 
 Card.propTypes = {
     anime: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
         urlCapa: PropTypes.string.isRequired,
         nome: PropTypes.string.isRequired,
     }).isRequired,

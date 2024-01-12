@@ -9,15 +9,22 @@ export function Anime() {
     const [anime, setAnime] = useState(null)
 
     const getAnime = async (url) => {
-        const res = await fetch(url)
+        const res = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                api_key: import.meta.env.VITE_API_KEY,
+            },
+        })
         const data = await res.json()
         setAnime(data)
     }
 
     useEffect(() => {
-        const animeUrl = `https://pw-animes-react-database.kevinsouza456.repl.co/animes/${id}`
+        const animeUrl = `${import.meta.env.VITE_API_URL}/animes/${id}`
         getAnime(animeUrl)
-    }, [])
+    }, [id])
 
     return (
         <>
