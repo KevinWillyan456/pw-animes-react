@@ -12,7 +12,9 @@ export function AnimeContentEpisodeList({
                     className={buttonClass}
                     onClick={() => gerenciarEpisodioButton(episodio)}
                 >
-                    {`EP ${episodio.episodioNumero}`}
+                    {episodio.episodioTipo !== 'normal'
+                        ? `EP ${episodio.episodioNumero} - ${episodio.episodioTipo}`
+                        : `EP ${episodio.episodioNumero}`}
                 </button>
             </li>
         </>

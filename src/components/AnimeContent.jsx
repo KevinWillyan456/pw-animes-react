@@ -29,11 +29,24 @@ export function AnimeContent({ anime }) {
         if (loadRef.current) {
             loadRef.current.innerHTML = `<iframe src="https://drive.google.com/file/d/${episodioEncontrado.episodioUrl}/preview" width="640" height="480" allow="autoplay" allowfullscreen="allowfullscreean"></iframe>`
 
-            if (!isNaN(episode) && episode < 10) {
-                const formattedEpisode = episode.toString().padStart(2, '0')
-                episodeIndicatorRef.current.textContent = `EP ${formattedEpisode}`
+            if (
+                !isNaN(episodioEncontrado.episodioNumero) &&
+                episodioEncontrado.episodioNumero < 10
+            ) {
+                const formattedEpisode = episodioEncontrado.episodioNumero
+                    .toString()
+                    .padStart(2, '0')
+                if (episodioEncontrado.episodioTipo !== 'normal') {
+                    episodeIndicatorRef.current.textContent = `EP ${formattedEpisode} - ${episodioEncontrado.episodioTipo}`
+                } else {
+                    episodeIndicatorRef.current.textContent = `EP ${formattedEpisode}`
+                }
             } else {
-                episodeIndicatorRef.current.textContent = `EP ${episode}`
+                if (episodioEncontrado.episodioTipo !== 'normal') {
+                    episodeIndicatorRef.current.textContent = `EP ${episodioEncontrado.episodioNumero} - ${episodioEncontrado.episodioTipo}`
+                } else {
+                    episodeIndicatorRef.current.textContent = `EP ${episodioEncontrado.episodioNumero}`
+                }
             }
         }
     }
