@@ -15,6 +15,14 @@ export function AnimeContent({ anime }) {
 
     const gerenciarEpisodioTela = () => {
         const episodios = anime.episodios
+
+        if (episodios.length === 0) {
+            if (loadRef.current) {
+                loadRef.current.innerHTML = `<div class="no-episodes">Não há episódios disponíveis</div>`
+            }
+            return
+        }
+
         const episodioEncontrado =
             episodios.find((episodio) => episodio.episodioNumero == episode) ||
             episodios[0]
@@ -31,6 +39,10 @@ export function AnimeContent({ anime }) {
     }
 
     const gerenciarEpisodioButton = (episodio) => {
+        if (anime.episodios.length === 0) {
+            return
+        }
+
         setEpisode(episodio.episodioNumero)
         setIndexEpisode(
             anime.episodios.findIndex(
@@ -47,6 +59,10 @@ export function AnimeContent({ anime }) {
     }, [episode])
 
     useEffect(() => {
+        if (anime.episodios.length === 0) {
+            return
+        }
+
         setEpisode(anime.episodios[indexEpisode].episodioNumero)
     }, [anime.episodios, indexEpisode])
 
