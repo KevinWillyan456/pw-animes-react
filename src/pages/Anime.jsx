@@ -3,10 +3,12 @@ import { useParams } from 'react-router-dom'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { AnimeContent } from '../components/AnimeContent'
+import { SpinnerLoading } from '../components/SpinnerLoading'
 
 export function Anime() {
     const { id } = useParams()
     const [anime, setAnime] = useState(null)
+    const [error, setError] = useState(false)
 
     const getAnime = async (url) => {
         const res = await fetch(url, {
@@ -16,7 +18,8 @@ export function Anime() {
                 Accept: 'application/json',
                 api_key: import.meta.env.VITE_API_KEY,
             },
-        })
+        }).catch(() => setError(true))
+
         const data = await res.json()
         setAnime(data)
     }
@@ -29,7 +32,16 @@ export function Anime() {
     return (
         <>
             <Header />
-            {anime && <AnimeContent anime={anime} />}
+            {anime ? (
+                <AnimeContent anime={anime} />
+            ) : error ? (
+                <div className="fetch-error">
+                    <h1>Erro na comunicação com o servidor</h1>
+                    <p>Infelizmente não será possível carregar este anime</p>
+                </div>
+            ) : (
+                <SpinnerLoading />
+            )}
             <Footer />
         </>
     )

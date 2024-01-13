@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Card } from './Card'
+import { SpinnerLoading } from './SpinnerLoading'
 
 export function MainSearch() {
     const [searchParams] = useSearchParams()
+    const [requestFinished, setRequestFinished] = useState(false)
+    const [error, setError] = useState(false)
 
     const [animes, setAnimes] = useState([])
     const query = searchParams.get('q')
@@ -16,7 +19,8 @@ export function MainSearch() {
                 Accept: 'application/json',
                 api_key: import.meta.env.VITE_API_KEY,
             },
-        })
+        }).catch(() => setError(true))
+
         const data = await res.json()
 
         if (!query) return
@@ -39,6 +43,7 @@ export function MainSearch() {
         })
 
         setAnimes(dataSerched)
+        setRequestFinished(true)
     }
 
     useEffect(() => {
@@ -59,6 +64,16 @@ export function MainSearch() {
                         animes.map((anime) => (
                             <Card key={anime._id} anime={anime} />
                         ))
+                    ) : error ? (
+                        <div className="fetch-error">
+                            <h1>Erro na comunicação com o servidor</h1>
+                            <p>
+                                Infelizmente não será possível carregar os
+                                animes
+                            </p>
+                        </div>
+                    ) : !requestFinished ? (
+                        <SpinnerLoading />
                     ) : (
                         <div className="anime-not-found">
                             <div className="content">
