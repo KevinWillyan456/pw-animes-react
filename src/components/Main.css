@@ -57,6 +57,21 @@
     text-align: center;
     color: var(--color-white);
 }
+.fetch-error {
+    width: 100%;
+    height: calc(100vh - 388px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    grid-column: 1 / -1;
+
+    color: var(--color-white);
+    font-size: 20px;
+    flex-direction: column;
+    gap: 20px;
+}
 
 @media (max-width: 1800px) {
     .container-animes .content-animes {

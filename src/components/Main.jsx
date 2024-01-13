@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Card } from './Card'
 import './Main.css'
+import { SpinnerLoading } from './SpinnerLoading'
 
 export function Main() {
     const [animes, setAnimes] = useState([])
+    const [error, setError] = useState(false)
 
     const getAnimes = async (url) => {
         const res = await fetch(url, {
@@ -13,7 +15,8 @@ export function Main() {
                 Accept: 'application/json',
                 api_key: import.meta.env.VITE_API_KEY,
             },
-        })
+        }).catch(() => setError(true))
+
         const data = await res.json()
 
         data.sort((a, b) => {
@@ -42,10 +45,21 @@ export function Main() {
         <>
             <section className="container-animes">
                 <div className="content-animes">
-                    {animes.length > 0 &&
+                    {animes.length > 0 ? (
                         animes.map((anime) => (
                             <Card key={anime._id} anime={anime} />
-                        ))}
+                        ))
+                    ) : error ? (
+                        <div className="fetch-error">
+                            <h1>Erro na comunicação com o servidor</h1>
+                            <p>
+                                Infelizmente não será possível carregar os
+                                animes
+                            </p>
+                        </div>
+                    ) : (
+                        <SpinnerLoading />
+                    )}
                 </div>
             </section>
         </>
