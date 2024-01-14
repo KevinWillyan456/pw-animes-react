@@ -141,6 +141,7 @@
     align-items: center;
     color: var(--color-white);
     font-size: 24px;
+    padding: 20px;
 }
 
 @media (max-width: 500px) {
