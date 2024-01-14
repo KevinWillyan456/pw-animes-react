@@ -3,10 +3,16 @@ import { useState } from 'react'
 import './AnimeContent.css'
 import { AnimeContentEpisodeList } from './AnimeContentEpisodeList'
 import PropTypes from 'prop-types'
+import StorageService from '../utils/StorageService'
+
+const storageService = new StorageService()
 
 export function AnimeContent({ anime }) {
-    const [episode, setEpisode] = useState(1)
-    const [indexEpisode, setIndexEpisode] = useState(0)
+    const [episode, setEpisode] = useState(storageService.read(anime._id) + 1)
+    const [indexEpisode, setIndexEpisode] = useState(
+        storageService.read(anime._id)
+    )
+
     const [selectedEpisode, setSelectedEpisode] = useState(1)
     const loadRef = useRef(null)
     const episodeIndicatorRef = useRef(null)
@@ -77,7 +83,8 @@ export function AnimeContent({ anime }) {
         }
 
         setEpisode(anime.episodios[indexEpisode].episodioNumero)
-    }, [anime.episodios, indexEpisode])
+        storageService.create(anime._id, indexEpisode)
+    }, [anime._id, anime.episodios, indexEpisode])
 
     const handlePreviousEpisode = () => {
         if (indexEpisode > 0) {
