@@ -68,9 +68,15 @@
     grid-column: 1 / -1;
 
     color: var(--color-white);
-    font-size: 20px;
     flex-direction: column;
     gap: 20px;
+    padding: 0 20px;
+}
+.fetch-error h1 {
+    font-size: 30px;
+}
+.fetch-error p {
+    font-size: 20px;
 }
 
 @media (max-width: 1800px) {
