@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Card } from './Card'
 import { SpinnerLoading } from './SpinnerLoading'
+import { useCallback } from 'react'
 
 export function MainSearch() {
     const [searchParams] = useSearchParams()
@@ -11,46 +12,48 @@ export function MainSearch() {
     const [animes, setAnimes] = useState([])
     const query = searchParams.get('q')
 
-    const getSearchedAnimes = async (url) => {
-        const res = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                api_key: import.meta.env.VITE_API_KEY,
-            },
-        }).catch(() => setError(true))
+    const getSearchedAnimes = useCallback(
+        async (url) => {
+            const res = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    api_key: import.meta.env.VITE_API_KEY,
+                },
+            }).catch(() => setError(true))
 
-        const data = await res.json()
+            const data = await res.json()
 
-        if (!query) return
+            if (!query) return
 
-        const dataSerched = data.filter((anime) => {
-            return anime.nome.toLowerCase().includes(query.toLowerCase())
-        })
+            const dataSerched = data.filter((anime) => {
+                return anime.nome.toLowerCase().includes(query.toLowerCase())
+            })
 
-        dataSerched.sort((a, b) => {
-            const nomeA = a.nome.toUpperCase()
-            const nomeB = b.nome.toUpperCase()
+            dataSerched.sort((a, b) => {
+                const nomeA = a.nome.toUpperCase()
+                const nomeB = b.nome.toUpperCase()
 
-            if (nomeA < nomeB) {
-                return -1
-            }
-            if (nomeA > nomeB) {
-                return 1
-            }
-            return 0
-        })
+                if (nomeA < nomeB) {
+                    return -1
+                }
+                if (nomeA > nomeB) {
+                    return 1
+                }
+                return 0
+            })
 
-        setAnimes(dataSerched)
-        setRequestFinished(true)
-    }
+            setAnimes(dataSerched)
+            setRequestFinished(true)
+        },
+        [query]
+    )
 
     useEffect(() => {
         const searchWithQueryURL = `${import.meta.env.VITE_API_URL}/animes`
         getSearchedAnimes(searchWithQueryURL)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [query])
+    }, [getSearchedAnimes, query])
 
     return (
         <>

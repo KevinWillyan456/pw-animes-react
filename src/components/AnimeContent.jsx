@@ -4,6 +4,7 @@ import './AnimeContent.css'
 import { AnimeContentEpisodeList } from './AnimeContentEpisodeList'
 import PropTypes from 'prop-types'
 import StorageService from '../utils/StorageService'
+import { useCallback } from 'react'
 
 const storageService = new StorageService()
 
@@ -19,7 +20,7 @@ export function AnimeContent({ anime }) {
 
     const totalEpisodes = anime.episodios.length
 
-    const gerenciarEpisodioTela = () => {
+    const gerenciarEpisodioTela = useCallback(() => {
         const episodios = anime.episodios
 
         if (episodios.length === 0) {
@@ -55,7 +56,7 @@ export function AnimeContent({ anime }) {
                 }
             }
         }
-    }
+    }, [anime.episodios, episode])
 
     const gerenciarEpisodioButton = (episodio) => {
         if (anime.episodios.length === 0) {
@@ -74,8 +75,7 @@ export function AnimeContent({ anime }) {
     useEffect(() => {
         gerenciarEpisodioTela()
         setSelectedEpisode(episode)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [episode])
+    }, [episode, gerenciarEpisodioTela])
 
     useEffect(() => {
         if (anime.episodios.length === 0) {
