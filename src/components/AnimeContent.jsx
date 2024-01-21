@@ -9,9 +9,11 @@ import { useCallback } from 'react'
 const storageService = new StorageService()
 
 export function AnimeContent({ anime }) {
-    const [episode, setEpisode] = useState(storageService.read(anime._id) + 1)
+    const [episode, setEpisode] = useState(
+        storageService.read(anime._id + 1, anime.episodios)
+    )
     const [indexEpisode, setIndexEpisode] = useState(
-        storageService.read(anime._id)
+        storageService.read(anime._id, anime.episodios)
     )
 
     const [selectedEpisode, setSelectedEpisode] = useState(1)

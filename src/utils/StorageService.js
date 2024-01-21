@@ -1,35 +1,65 @@
 export default class StorageService {
-    create(id, number) {
+    parseHistory() {
         const values = localStorage.getItem('history')
-        if (values) {
-            const history = JSON.parse(values)
-            const item = history.find((item) => item.id === id)
-            if (item) {
-                item.number = number
-                localStorage.setItem('history', JSON.stringify(history))
-                return
-            }
-            history.push({ id: id, number: number })
-            localStorage.setItem('history', JSON.stringify(history))
-            return
-        } else {
-            const data = {
-                id: id,
-                number: number,
-            }
-            localStorage.setItem('history', JSON.stringify([data]))
+        try {
+            return values ? JSON.parse(values) : []
+        } catch (error) {
+            console.error('Error parsing history:', error)
+            return []
         }
     }
 
-    read(id) {
-        const value = localStorage.getItem('history')
-        if (value) {
-            const history = JSON.parse(value)
-            const item = history.find((item) => item.id === id)
-            if (item) {
-                return item.number
-            }
+    updateHistory(history) {
+        localStorage.setItem('history', JSON.stringify(history))
+    }
+
+    create(id, number) {
+        const history = this.parseHistory()
+        const item = history.find((item) => item.id === id)
+
+        if (item) {
+            item.number = number
+        } else {
+            history.push({ id, number })
         }
+
+        this.updateHistory(history)
+    }
+
+    read(id, episodes = []) {
+        const history = this.parseHistory()
+        const item = history.find((item) => item.id === id)
+
+        if (item) {
+            let nextEpisodeNumber = item.number + 1
+
+            while (
+                nextEpisodeNumber <=
+                Math.max(...episodes.map((episode) => episode.episodioNumero))
+            ) {
+                const episode = episodes.find(
+                    (episode) => episode.episodioNumero === nextEpisodeNumber
+                )
+
+                if (
+                    episode &&
+                    episodes.find(
+                        (episodeEach) =>
+                            episodeEach.episodioNumero ===
+                            episode.episodioNumero
+                    )
+                ) {
+                    return item.number
+                }
+
+                nextEpisodeNumber++
+            }
+
+            const index = history.indexOf(item)
+            history[index] = { id, number: 0 }
+            this.updateHistory(history)
+        }
+
         return 0
     }
 }
